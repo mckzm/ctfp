@@ -3,7 +3,7 @@
 // 5. implement all Bool -> Bool funcs
 
 #![allow(dead_code)]
-use std::collections::BTreeMap;
+use std::collections::HashMap;
 use std::hash::Hash;
 
 // 1. memoize
@@ -13,14 +13,14 @@ use std::hash::Hash;
 // w/ the cache being part of the env of the returned func
 struct Memoizer<T, U> {
     f: Box<dyn Fn(T) -> U>,
-    store: BTreeMap<T, U>,
+    store: HashMap<T, U>,
 }
 
-impl<T: Clone + Eq + Hash + Ord, U: Clone> Memoizer<T, U> {
+impl<T: Clone + Eq + Hash, U: Clone> Memoizer<T, U> {
     fn new(f: impl Fn(T) -> U + 'static) -> Self {
         Self {
             f: Box::new(f),
-            store: BTreeMap::new(),
+            store: HashMap::new(),
         }
     }
 
@@ -33,7 +33,7 @@ impl<T: Clone + Eq + Hash + Ord, U: Clone> Memoizer<T, U> {
     }
 }
 
-// 2. Bool -> Bool funcs
+// 5. Bool -> Bool funcs
 fn id_bool(b: bool) -> bool {
     b
 }
@@ -56,8 +56,8 @@ mod tests {
     use super::*;
     use std::time::{Duration, Instant};
 
-    fn gen_fib_nums_to_ten() -> BTreeMap<u32, u32> {
-        BTreeMap::from([
+    fn gen_fib_nums_to_ten() -> HashMap<u32, u32> {
+        HashMap::from([
             (0, 0),
             (1, 1),
             (2, 1),
@@ -100,10 +100,6 @@ mod tests {
     // Unstable's test::Benchmark or Criterion.
     // [should really be macro_rules!()'ed to reduce duplication]
     // run w/ `cargo test -- --include-ignored --show-output`
-    // unexpectedly, the warmed-up memoized approach typically comes in last,
-    // regardless of the profile used, while the cold memoized approach
-    // sometimes comes in first when using the release profile.
-    // There's probably a thinko somewhere xD
     #[ignore]
     #[test]
     fn bench_fib() {
