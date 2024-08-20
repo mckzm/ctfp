@@ -1,1 +1,1 @@
-Exercises/Challenges from <https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/>
+Exercises/Challenges from Bartosz Milewski's [Category Theory for Programmers](<https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/>)
