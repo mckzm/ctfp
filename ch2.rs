@@ -96,7 +96,7 @@ mod tests {
         assert_eq!(fib_memoized.store, gen_fib_nums_to_ten());
     }
 
-    // pseudo-benchmarks for ballpark figures in lieu of using either
+    // naive pseudo-benchmarks for ballpark figures in lieu of using either
     // Unstable's test::Benchmark or Criterion.
     // [should really be macro_rules!()'ed to reduce duplication]
     // run w/ `cargo test -- --include-ignored --show-output`
