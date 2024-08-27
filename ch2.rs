@@ -7,10 +7,7 @@ use std::collections::HashMap;
 use std::hash::Hash;
 
 // 1. memoize
-// using a wrapper struct because unlike closures,
-// values of type `fn` do not capture their env
-// if they did, memoize could just be impl'ed as a higher-order func
-// w/ the cache being part of the env of the returned func
+// using a wrapper struct allows us to inspect the cache
 struct Memoizer<T, U> {
     f: Box<dyn Fn(T) -> U>,
     store: HashMap<T, U>,
@@ -24,7 +21,8 @@ impl<T: Clone + Eq + Hash, U: Clone> Memoizer<T, U> {
         }
     }
 
-    // we just wrap a call to `f`, so intermediate results are not cached
+    // we just wrap the initial call to `f`;
+    // recursive functions' intermediate results are not cached
     fn call(&mut self, arg: T) -> U {
         self.store
             .entry(arg.clone())
