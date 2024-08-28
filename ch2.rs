@@ -8,7 +8,7 @@ use std::hash::Hash;
 
 // 1. memoize
 // using a wrapper struct allows us to inspect the cache
-// it tanks perf though
+// it also tanks perf
 struct Memoizer<T, U> {
     f: Box<dyn Fn(T) -> U>,
     store: HashMap<T, U>,
