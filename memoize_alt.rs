@@ -1,6 +1,4 @@
 //   polymorphic memoize implemented as an FnMut closure
-//   considerably more performant than the struct version when warmed up
-//   (twice as performant as plain fib)
 //   drawback: no (simple) way to inspect the cache as closures are opaque
 
 #![allow(unused)]

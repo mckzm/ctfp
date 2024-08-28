@@ -8,7 +8,6 @@ use std::hash::Hash;
 
 // 1. memoize
 // using a wrapper struct allows us to inspect the cache
-// it also tanks perf
 struct Memoizer<T, U> {
     f: Box<dyn Fn(T) -> U>,
     store: HashMap<T, U>,
@@ -26,8 +25,8 @@ impl<T: Clone + Eq + Hash, U: Clone> Memoizer<T, U> {
     // recursive functions' intermediate results are not cached
     fn call(&mut self, arg: T) -> U {
         self.store
-            .entry(arg.clone())
-            .or_insert((self.f)(arg))
+            .entry(arg)
+            .or_insert_with_key(|x| (self.f)(x.clone()))
             .clone()
     }
 }
