@@ -39,8 +39,6 @@ impl<T> Functor for Option<T> {
 
 #[cfg(test)]
 mod tests {
-    use super::reader_functor;
-
     use super::*;
 
     #[test]
