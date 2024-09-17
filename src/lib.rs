@@ -6,4 +6,5 @@ mod ch5;
 mod ch6;
 mod ch7;
 mod ch8;
+mod ch9;
 mod memoize_alt;
