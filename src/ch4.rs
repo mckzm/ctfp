@@ -16,9 +16,7 @@ pub mod optional {
         f: impl Fn(T) -> Option<U>,
         g: impl Fn(U) -> Option<U>,
     ) -> impl Fn(T) -> Option<U> {
-        // Clippy recommends passing `g` to `and_then` directly,
-        // but this triggers <https://doc.rust-lang.org/error_codes/E0507.html>
-        move |x| f(x).and_then(|y| g(y))
+        move |x| f(x).and_then(&g)
     }
 
     fn safe_root(arg: f64) -> Option<f64> {
