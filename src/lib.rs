@@ -1,4 +1,5 @@
 mod ch1;
+mod ch10;
 mod ch2;
 mod ch3;
 mod ch4;
@@ -7,4 +8,5 @@ mod ch6;
 mod ch7;
 mod ch8;
 mod ch9;
+mod currying_alt;
 mod memoize_alt;
